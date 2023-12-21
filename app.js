@@ -4,12 +4,14 @@ const dotenv =require('dotenv');
 const app = express();
 
 const categorieRouter=require("./routes/categorie.route");
-const scategorieRoute=require("./routes/scategorie.route");
+const scategorieRouter=require("./routes/scategorie.route");
+const articleRouter=require("./routes/article.route");
 const scategorie = require('./models/scategorie');
+const article = require('./models/article');
 dotenv.config()
 app.use(express.json());
 // Connexion à la base données
-mongoose.connect(process.env.DATABASE,{
+mongoose.connect(process.env.DATABASECLOUD,{
 useNewUrlParser: true,
 useUnifiedTopology: true
 })
@@ -22,7 +24,11 @@ process.exit();
 app.get("/",(req,res)=>{
 res.send("Bibliothèque");
 });
+
 app.use("/api/categorie",categorieRouter)
-app.use("/api/scategorie",scategorieRoute)
+app.use("/api/scategorie",scategorieRouter)
+app.use("/api/article",articleRouter)
 app.listen(process.env.PORT, () => {
 console.log(`Server is listening on port ${process.env.PORT}`); });
+
+module.exports = app;
