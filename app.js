@@ -2,7 +2,10 @@ const express =require('express');
 const mongoose =require("mongoose");
 const dotenv =require('dotenv');
 const app = express();
-const categorieRouter=require("./routes/categorie.route")
+
+const categorieRouter=require("./routes/categorie.route");
+const scategorieRoute=require("./routes/scategorie.route");
+const scategorie = require('./models/scategorie');
 dotenv.config()
 app.use(express.json());
 // Connexion à la base données
@@ -20,5 +23,6 @@ app.get("/",(req,res)=>{
 res.send("Bibliothèque");
 });
 app.use("/api/categorie",categorieRouter)
+app.use("/api/scategorie",scategorieRoute)
 app.listen(process.env.PORT, () => {
 console.log(`Server is listening on port ${process.env.PORT}`); });
