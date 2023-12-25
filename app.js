@@ -9,6 +9,8 @@ app.use(cors())
 const categorieRouter=require("./routes/categorie.route");
 const scategorieRouter=require("./routes/scategorie.route");
 const articleRouter=require("./routes/article.route");
+const userRouter=require("./routes/user.route");
+
 const scategorie = require('./models/scategorie');
 const article = require('./models/article');
 dotenv.config()
@@ -31,6 +33,7 @@ res.send("Bibliothèque");
 app.use("/api/categorie",categorieRouter)
 app.use("/api/scategorie",scategorieRouter)
 app.use("/api/article",articleRouter)
+app.use("/api/user",userRouter)
 app.listen(process.env.PORT, () => {
 console.log(`Server is listening on port ${process.env.PORT}`); });
 

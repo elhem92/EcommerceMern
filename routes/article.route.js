@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Article=require("../models/article")
+const Article=require("../models/article");
+const { verifyToken } = require('../middleware/verifyToken');
+const { authorizeRoles } = require('../middleware/authorizeRoles');
+
+
 // afficher la liste des articles.
-router.get('/', async (req, res, )=> {
+    //zedna verifToken pour verifier avant la connexion si l'utilisateur envoyer un token ou nn
+
+router.get('/',verifyToken, authorizeRoles("admin","supperuser") ,async (req, res, )=> {
 try {
 const articles = await Article.find();
 res.status(200).json(articles);
@@ -50,4 +56,4 @@ res.status(200).json(nouvarticle );
     await Article.findByIdAndDelete(id);
     res.json({ message: "article deleted successfully." });
     });
-    module.exports = router;
+module.exports = router;
